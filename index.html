@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101113">
+    <title>Digital Silence</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #101113;
+        color: #f3f1ed;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1.25rem;
+        background:
+          radial-gradient(ellipse at 50% 40%, rgb(39 41 45 / 42%), transparent 58%),
+          #101113;
+      }
+
+      main {
+        width: min(100%, 38rem);
+        padding: 2rem 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.75rem, 9vw, 5rem);
+        font-weight: 500;
+        letter-spacing: -0.065em;
+        line-height: 1;
+      }
+
+      .introduction {
+        max-width: 32rem;
+        margin: 2rem 0 0;
+        color: #c2c0bc;
+        font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+        line-height: 1.75;
+      }
+
+      .instruction {
+        margin: 2.5rem 0 0.9rem;
+        color: #f3f1ed;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      audio {
+        display: block;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      audio:focus-visible {
+        outline: 2px solid #d5c6a1;
+        outline-offset: 5px;
+        border-radius: 0.25rem;
+      }
+
+      .completion {
+        min-height: 1.5em;
+        margin: 1rem 0 0;
+        color: #c2c0bc;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Digital Silence</h1>
+      <p class="introduction">
+        We keep in touch with quick messages and familiar small talk. Then a
+        conversation fades into silence, and the distance between two people
+        becomes hard to ignore.
+      </p>
+      <p class="instruction">
+        This is an audio story. Put on headphones, click play, and listen until the end.
+      </p>
+      <audio id="story-audio" controls preload="metadata">
+        <source src="assets/AudioStory-version2.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+      <p id="completion" class="completion" aria-live="polite"></p>
+    </main>
+    <script>
+      const storyAudio = document.querySelector("#story-audio");
+      const completion = document.querySelector("#completion");
+
+      storyAudio.addEventListener("ended", () => {
+        completion.textContent = "The story has ended.";
+      });
+    </script>
+  </body>
+</html>
