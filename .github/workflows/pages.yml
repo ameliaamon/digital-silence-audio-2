@@ -44,6 +44,7 @@ jobs:
             count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" \
               --jq '.artifacts | map(select(.name == "github-pages" and (.expired | not))) | length')
             if [ "$count" -gt 0 ]; then
+              sleep 3
               exit 0
             fi
             attempt=$((attempt + 1))
