@@ -35,6 +35,10 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+      - name: Verify artifact access
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" --jq '{total_count, names: [.artifacts[].name]}'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
